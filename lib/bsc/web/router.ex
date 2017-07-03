@@ -20,7 +20,8 @@ defmodule Bsc.Web.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Bsc.Web do
-  #   pipe_through :api
-  # end
+  scope "/api", Bsc.Web do
+    pipe_through :api
+    resources "/orgs", OrgController, except: [:new, :edit]
+  end
 end
