@@ -4,7 +4,9 @@ defmodule Bsc.Medical do
   """
 
   import Ecto.Query, warn: false
+  import Ecto.Changeset
   alias Bsc.Repo
+  import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0, hashpwsalt: 1]
 
   alias Bsc.Medical.Org
 
@@ -147,7 +149,7 @@ defmodule Bsc.Medical do
   """
   def create_user(attrs \\ %{}) do
     %User{}
-    |> User.changeset(attrs)
+    |> User.auth_changeset(attrs)
     |> Repo.insert()
   end
 
@@ -165,7 +167,7 @@ defmodule Bsc.Medical do
   """
   def update_user(%User{} = user, attrs) do
     user
-    |> User.changeset(attrs)
+    |> User.auth_update_changeset(attrs)
     |> Repo.update()
   end
 
@@ -388,5 +390,36 @@ defmodule Bsc.Medical do
   """
   def change_patient(%Patient{} = patient) do
     Patient.changeset(patient, %{})
+  end
+
+  @doc """
+  Hash the password and add it to the user model or changeset.
+
+  Before the password is hashed, it is checked to make sure that
+  it is not too weak. See the documentation for the Openmaize.Password
+  module for more information about the options available.
+
+  This function will return a changeset. If there are any errors, they
+  will be added to the changeset.
+
+  Comeonin.Bcrypt is the default hashing function, but this can be changed to
+  Comeonin.Pbkdf2, or any other algorithm, by setting the Config.crypto_mod value.
+  """
+  def add_password_hash(user, params) do
+    (params[:password] || params["password"])
+    |> add_hash_changeset(user)
+  end
+
+  @doc """
+  adds password hash to user changeset before creation
+  """
+  def add_hash_changeset(password, user) do
+      case password do
+          nil ->
+              user
+          _ ->
+              change(user, %{:password_hash =>
+                hashpwsalt(password)})
+      end
   end
 end
