@@ -23,5 +23,6 @@ defmodule Bsc.Web.Router do
   scope "/api", Bsc.Web do
     pipe_through :api
     resources "/orgs", OrgController, except: [:new, :edit]
+    resources "/users", UserController, except: [:new, :edit]
   end
 end
