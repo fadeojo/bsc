@@ -11,6 +11,8 @@ defmodule Bsc.Web.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
   end
 
   scope "/", Bsc.Web do
@@ -26,5 +28,6 @@ defmodule Bsc.Web.Router do
     resources "/users", UserController, except: [:new, :edit]
     resources "/rooms", RoomController, except: [:new, :edit]
     resources "/patients", PatientController, except: [:new, :edit]
+    post "/login", AuthController, :login
   end
 end

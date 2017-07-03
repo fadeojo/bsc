@@ -5,10 +5,10 @@ defmodule Bsc.Medical do
 
   import Ecto.Query, warn: false
   import Ecto.Changeset
-  alias Bsc.Repo
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0, hashpwsalt: 1]
-
+  alias Bsc.Repo
   alias Bsc.Medical.Org
+  alias Guardian.Plug
 
   @doc """
   Returns the list of orgs.
@@ -421,5 +421,32 @@ defmodule Bsc.Medical do
               change(user, %{:password_hash =>
                 hashpwsalt(password)})
       end
+  end
+
+  @doc """
+  Check user password.
+
+  ## Examples
+
+      iex> check_pswd(%{field: value})
+      {:ok, true}
+
+      iex> check_pswd(%{field: bad_value})
+      {:error, :unauthorized}
+      {:error, :not_found}
+
+  """
+  def check_pswd(attrs \\ %{}) do
+    user = Repo.get_by!(User, email: attrs["email"])
+
+    cond do
+      user && checkpw(attrs["password"], user.password_hash) ->
+        {:ok, user}
+      user ->
+        {:error, %{message: "Unauthorized"}}
+      true ->
+        dummy_checkpw()
+         {:error, %{message: "Not Found"}}
+    end
   end
 end

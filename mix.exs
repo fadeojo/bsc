@@ -28,15 +28,17 @@ defmodule Bsc.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.3.0-rc"},
-     {:phoenix_pubsub, "~> 1.0"},
-     {:phoenix_ecto, "~> 3.2"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.6"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.11"},
-     {:comeonin, "~> 3.1"},
-     {:cowboy, "~> 1.0"}]
+    [{:phoenix, "~> 1.3.0-rc", override: true},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:phoenix_ecto, "~> 3.2"},
+      {:postgrex, ">= 0.0.0"},
+      {:phoenix_html, "~> 2.6"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:gettext, "~> 0.11"},
+      {:comeonin, "~> 3.1"},
+      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+      {:guardian, "~> 0.14"},
+      {:cowboy, "~> 1.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
