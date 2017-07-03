@@ -196,4 +196,70 @@ defmodule Bsc.MedicalTest do
       assert %Ecto.Changeset{} = Medical.change_room(room)
     end
   end
+
+  describe "patients" do
+    alias Bsc.Medical.Patient
+
+    @valid_attrs %{first_name: "some first_name", height: "some height", last_name: "some last_name", sex: "some sex"}
+    @update_attrs %{first_name: "some updated first_name", height: "some updated height", last_name: "some updated last_name", sex: "some updated sex"}
+    @invalid_attrs %{first_name: nil, height: nil, last_name: nil, sex: nil}
+
+    def patient_fixture(attrs \\ %{}) do
+      {:ok, patient} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Medical.create_patient()
+
+      patient
+    end
+
+    test "list_patients/0 returns all patients" do
+      patient = patient_fixture()
+      assert Medical.list_patients() == [patient]
+    end
+
+    test "get_patient!/1 returns the patient with given id" do
+      patient = patient_fixture()
+      assert Medical.get_patient!(patient.id) == patient
+    end
+
+    test "create_patient/1 with valid data creates a patient" do
+      assert {:ok, %Patient{} = patient} = Medical.create_patient(@valid_attrs)
+      assert patient.first_name == "some first_name"
+      assert patient.height == "some height"
+      assert patient.last_name == "some last_name"
+      assert patient.sex == "some sex"
+    end
+
+    test "create_patient/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Medical.create_patient(@invalid_attrs)
+    end
+
+    test "update_patient/2 with valid data updates the patient" do
+      patient = patient_fixture()
+      assert {:ok, patient} = Medical.update_patient(patient, @update_attrs)
+      assert %Patient{} = patient
+      assert patient.first_name == "some updated first_name"
+      assert patient.height == "some updated height"
+      assert patient.last_name == "some updated last_name"
+      assert patient.sex == "some updated sex"
+    end
+
+    test "update_patient/2 with invalid data returns error changeset" do
+      patient = patient_fixture()
+      assert {:error, %Ecto.Changeset{}} = Medical.update_patient(patient, @invalid_attrs)
+      assert patient == Medical.get_patient!(patient.id)
+    end
+
+    test "delete_patient/1 deletes the patient" do
+      patient = patient_fixture()
+      assert {:ok, %Patient{}} = Medical.delete_patient(patient)
+      assert_raise Ecto.NoResultsError, fn -> Medical.get_patient!(patient.id) end
+    end
+
+    test "change_patient/1 returns a patient changeset" do
+      patient = patient_fixture()
+      assert %Ecto.Changeset{} = Medical.change_patient(patient)
+    end
+  end
 end
