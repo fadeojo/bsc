@@ -38,6 +38,8 @@ defmodule Bsc.Web.Endpoint do
     key: "_bsc_key",
     signing_salt: "PaaN/+gj"
 
+  plug CORSPlug
+
   plug Bsc.Web.Router
 
   @doc """
