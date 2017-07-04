@@ -38,6 +38,7 @@ defmodule Bsc.Mixfile do
       {:comeonin, "~> 3.1"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:guardian, "~> 0.14"},
+      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:cowboy, "~> 1.0"}]
   end
 
