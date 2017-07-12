@@ -16,8 +16,11 @@ defmodule Bsc.Web.UserView do
       last_name: user.last_name,
       username: user.username,
       email: user.email,
-      password_hash: user.password_hash,
       reset_token: user.reset_token,
       role: user.role}
+  end
+
+  def render("error.json", %{message: message}) do
+    %{error: message}
   end
 end

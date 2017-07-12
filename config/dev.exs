@@ -55,3 +55,7 @@ config :bsc, Bsc.Repo,
   database: "bsc_dev",
   hostname: "localhost",
   pool_size: 10
+
+  # configure mongo
+  config :bsc, :db, name: "bsc"
+

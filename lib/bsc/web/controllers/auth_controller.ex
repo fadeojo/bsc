@@ -19,4 +19,4 @@ defmodule Bsc.Web.AuthController do
         |> render("login.json", %{token: jwt})
     end
   end
-  end
+end

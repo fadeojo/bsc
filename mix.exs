@@ -17,7 +17,7 @@ defmodule Bsc.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Bsc.Application, []},
-     extra_applications: [:logger, :runtime_tools]]
+     extra_applications: [:logger, :runtime_tools, :mongodb, :poolboy]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,6 +39,8 @@ defmodule Bsc.Mixfile do
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:guardian, "~> 0.14"},
       {:cors_plug, "~> 1.1"},
+      {:mongodb, "~> 0.4.0"},
+      {:poolboy, "1.5.1"},
       {:cowboy, "~> 1.0"}]
   end
 

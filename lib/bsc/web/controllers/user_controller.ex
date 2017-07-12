@@ -5,6 +5,7 @@ defmodule Bsc.Web.UserController do
   alias Bsc.Medical.User
 
   action_fallback Bsc.Web.FallbackController
+  plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__] when not action in [:create]
 
   def index(conn, _params) do
     users = Medical.list_users()
@@ -38,5 +39,11 @@ defmodule Bsc.Web.UserController do
     with {:ok, %User{}} <- Medical.delete_user(user) do
       send_resp(conn, :no_content, "")
     end
+  end
+
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_status(401)
+    |> render "error.json", message: "Authentication required"
   end
 end
