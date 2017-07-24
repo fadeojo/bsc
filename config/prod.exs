@@ -29,6 +29,9 @@ config :bsc, Bsc.Repo,
 # Do not print debug messages in production
 config :logger, level: :info
 
+# configure mongo
+  config :bsc, :db, name: "bsc"
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
