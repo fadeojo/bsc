@@ -12,7 +12,7 @@ config :bsc,
 # Configures the endpoint
 config :bsc, Bsc.Web.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "+zmURT9lhOxhQuCYkjyD/PP75ROFSjeY/NlUQejgFd/nxVUxSSd7NSUkcdVbCMHW",
+  secret_key_base: System.get_env("BSC_SECRET"),
   render_errors: [view: Bsc.Web.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Bsc.PubSub,
            adapter: Phoenix.PubSub.PG2]
@@ -29,7 +29,7 @@ config :guardian, Guardian,
   ttl: {30, :days},
   allowed_drift: 2000,
   verify_issuer: true, # optional
-  secret_key: "standingonthepromisesofGod",
+  secret_key: System.get_env("BSC_SECRET"),
   serializer: Bsc.GuardianSerializer
 
 # Import environment specific config. This must remain at the bottom

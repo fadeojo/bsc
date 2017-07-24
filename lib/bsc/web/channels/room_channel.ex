@@ -1,7 +1,7 @@
 defmodule Bsc.Web.RoomChannel do
   use Bsc.Web, :channel
 
-  def join("room:lobby", payload, socket) do
+  def join("room:" <> id , payload, socket) do
     if authorized?(payload) do
       {:ok, socket}
     else

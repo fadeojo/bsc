@@ -17,17 +17,17 @@ defmodule Bsc.Application do
       supervisor(Bsc.Web.Endpoint, []),
       # Start your own worker by calling: Bsc.Worker.start_link(arg1, arg2, arg3)
       # worker(Bsc.Worker, [arg1, arg2, arg3]),
-      worker(Mongo, [[database:
-        Application.get_env(:bsc, :db)[:name],
-        name: :bsc], ])
       # worker(Mongo, [[database:
       #   Application.get_env(:bsc, :db)[:name],
-      #   name: :bsc, 
-      #   hostname: "ds153412.mlab.com",
-      #   port: "53412",
-      #   auth_source: "bsc",
-      #   username: "oadeojo",
-      #   password: "oadeojo"], ])
+      #   name: :bsc], ])
+
+      worker(Mongo, [[database:
+        Application.get_env(:bsc, :db)[:name],
+        name: :bsc, 
+        hostname: "ds147882.mlab.com",
+        port: "47882",
+        username: "admin",
+        password: "mongoadmin"], ])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

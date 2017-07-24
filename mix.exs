@@ -39,7 +39,7 @@ defmodule Bsc.Mixfile do
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:guardian, "~> 0.14"},
       {:cors_plug, "~> 1.1"},
-      {:mongodb, "~> 0.4.0"},
+      {:mongodb, git: "https://github.com/ankhers/mongodb.git", ref: "8b6e1ed4d1615920a0fa0452261fcfc48f3712e6"},
       {:poolboy, "1.5.1"},
       {:cowboy, "~> 1.0"}]
   end
