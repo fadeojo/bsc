@@ -15,7 +15,7 @@ defmodule Bsc.Medical.Room do
   @doc false
   def changeset(%Room{} = room, attrs) do
     room
-    |> cast(attrs, [:name, :description])
+    |> cast(attrs, [:name, :description, :org_id])
     |> validate_required([:name, :description])
   end
 end

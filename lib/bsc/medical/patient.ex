@@ -19,7 +19,7 @@ defmodule Bsc.Medical.Patient do
   @doc false
   def changeset(%Patient{} = patient, attrs) do
     patient
-    |> cast(attrs, [:first_name, :last_name, :sex, :height])
+    |> cast(attrs, [:first_name, :last_name, :sex, :height, :org_id, :room_id, :user_id])
     |> validate_required([:first_name, :last_name, :sex, :height])
   end
 end

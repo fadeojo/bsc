@@ -15,6 +15,7 @@ defmodule Bsc.Web.PatientView do
       first_name: patient.first_name,
       last_name: patient.last_name,
       sex: patient.sex,
+      room: patient.room_id,
       height: patient.height}
   end
 end

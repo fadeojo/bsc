@@ -25,7 +25,9 @@ defmodule Bsc.Web.Router do
   scope "/api", Bsc.Web do
     pipe_through :api
     resources "/orgs", OrgController, except: [:new, :edit]
-    resources "/users", UserController, except: [:new, :edit]
+    resources "/users", UserController, except: [:new, :edit] do 
+      resources "/patients", PatientController, except: [:new, :edit]
+    end
     resources "/rooms", RoomController, except: [:new, :edit]
     resources "/patients", PatientController, except: [:new, :edit]
     post "/login", AuthController, :login
