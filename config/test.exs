@@ -17,3 +17,6 @@ config :bsc, Bsc.Repo,
   database: "bsc_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# configure mongo
+config :bsc, :db, name: "bsc"
