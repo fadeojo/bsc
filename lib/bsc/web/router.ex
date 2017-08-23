@@ -32,5 +32,6 @@ defmodule Bsc.Web.Router do
     resources "/patients", PatientController, except: [:new, :edit]
     post "/login", AuthController, :login
     post "/radar", DeviceController, :create
+    get "/radar", DeviceController, :index
   end
 end
