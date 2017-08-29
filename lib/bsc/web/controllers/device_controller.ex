@@ -12,7 +12,7 @@ defmodule Bsc.Web.DeviceController do
 
   def create(conn, %{"device" => device_params}) do
     Mongo.insert_one(:bsc, "radar", %{radar_tick: device_params})
-    Bsc.Web.Endpoint.broadcast! "room:<> #{device_params["radar_id"]}", "new_msg", %{brate: device_params["BreathingRate"]}
+    Bsc.Web.Endpoint.broadcast! "room:<>#{device_params["deviceId"]}", "new_msg", %{brate: device_params["BreathingRate"]}
     conn |> render("radar.json", %{brate: device_params["BreathingRate"]})
   end
 
