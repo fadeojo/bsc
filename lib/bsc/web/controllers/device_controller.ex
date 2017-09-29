@@ -6,7 +6,7 @@ defmodule Bsc.Web.DeviceController do
   action_fallback Bsc.Web.FallbackController
 
   def index(conn, params) do
-    bio_data_list =  Mongo.find(:bsc, "radar", %{}) |> Enum.to_list
+    bio_data_list =  Mongo.find(:bsc, "radar", %{}, limit: 300) |> Enum.to_list
     conn |> render("index.json", %{radar: bio_data_list})
   end
 
