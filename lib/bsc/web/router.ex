@@ -33,5 +33,6 @@ defmodule Bsc.Web.Router do
     post "/login", AuthController, :login
     post "/radar", DeviceController, :create
     get "/radar", DeviceController, :index
+    post "/radar/query", DeviceController, :search
   end
 end

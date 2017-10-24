@@ -17,7 +17,8 @@ defmodule Bsc.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Bsc.Application, []},
-     extra_applications: [:logger, :runtime_tools, :mongodb, :poolboy]]
+     extra_applications: [:logger, :runtime_tools, :mongodb, :poolboy,
+     :ex_aws, :hackney, :poison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -41,6 +42,9 @@ defmodule Bsc.Mixfile do
       {:cors_plug, "~> 1.1"},
       {:mongodb, git: "https://github.com/ankhers/mongodb.git", ref: "8b6e1ed4d1615920a0fa0452261fcfc48f3712e6"},
       {:poolboy, "1.5.1"},
+      {:ex_aws, "~> 1.0"},
+      {:poison, "~> 2.0"},
+      {:hackney, "~> 1.6"},
       {:cowboy, "~> 1.0"}]
   end
 

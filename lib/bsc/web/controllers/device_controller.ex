@@ -1,5 +1,6 @@
 defmodule Bsc.Web.DeviceController do
   use Bsc.Web, :controller
+  require IEx
 
   alias Bsc.Medical
 
@@ -7,6 +8,11 @@ defmodule Bsc.Web.DeviceController do
 
   def index(conn, params) do
     bio_data_list =  Mongo.find(:bsc, "radar", %{}, limit: 300) |> Enum.to_list
+    conn |> render("index.json", %{radar: bio_data_list})
+  end
+
+  def search(conn, params) do
+    bio_data_list =  Mongo.find(:bsc, "radar", params["query"], limit: 300) |> Enum.to_list
     conn |> render("index.json", %{radar: bio_data_list})
   end
 
