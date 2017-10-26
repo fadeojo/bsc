@@ -12,7 +12,8 @@ defmodule Bsc.Web.DeviceController do
   end
 
   def search(conn, params) do
-    bio_data_list =  Mongo.find(:bsc, "radar", params["query"], limit: 300) |> Enum.to_list
+    #TODO: handle limit that exceeds data set
+    bio_data_list =  Mongo.find(:bsc, "radar", params["query"], limit: params["limit"] || 300, skip: params["skip"] || 0) |> Enum.to_list
     conn |> render("index.json", %{radar: bio_data_list})
   end
 
