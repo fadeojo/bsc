@@ -25,7 +25,7 @@ defmodule Bsc.Web.DeviceController do
       deviceId: device_params["deviceId"] || "",
       time: device_params["time"] || "",
     }
-    Bsc.Web.Endpoint.broadcast!("room:#{device_params["deviceId"]}", "shout", bio_date)
+    Bsc.Web.Endpoint.broadcast!("room:#{device_params["deviceId"]}", "shout", bio_data)
     conn |> render("radar.json", %{brate: device_params["BreathingRate"]})
   end
 
