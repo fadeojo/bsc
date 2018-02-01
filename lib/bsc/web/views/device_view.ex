@@ -9,8 +9,15 @@ defmodule Bsc.Web.DeviceView do
     %{data: render_many(bio_data_list, DeviceView, "bio_data_list.json")}
   end
 
-  def render("bio_data_list.json", %{device: %{"radar_tick" => %{"BreathingRate" => rate} }}) do
-    %{breathing_rate: rate }
+  def render("bio_data_list.json", bio_data) do
+    case bio_data do
+      %{device: %{"radar_tick" => %{"BreathingRate" => rate} }} ->
+        %{breathing_rate: rate }
+      _ ->
+        %{breathing_rate: 0 }
+
+    end
+
   end
 
   def render("radar.json", %{brate: rate}) do
