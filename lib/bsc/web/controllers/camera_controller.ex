@@ -7,12 +7,12 @@ defmodule Bsc.Web.CameraController do
   action_fallback(Bsc.Web.FallbackController)
 
   def create(conn, device_params) do
-    Mongo.insert_one(:bsc, "camera", %{camera_tick: device_params})
-
     bio_data = %{
       posture: device_params["posture"] || "",
       timestamp: device_params["timestamp"] || ""
     }
+
+    Mongo.insert_one(:bsc, "camera", %{camera_tick: bio_data})
 
     Bsc.Web.Endpoint.broadcast!("room:posture", "shout", bio_data)
 
