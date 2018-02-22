@@ -27,7 +27,7 @@ defmodule Bsc.Application do
         hostname: "ds147882.mlab.com",
         port: "47882",
         username: "admin",
-        password: "mongoadmin"], ])
+        password: "mongoadmin"]])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
